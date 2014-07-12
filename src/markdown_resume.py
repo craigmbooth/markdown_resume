@@ -8,7 +8,6 @@ import glob
 from utils import swap_extension, replace_fa_strings
 
 def output_pdf(input_file, output_file, contextfile):
-    output_file = swap_extension(input_file.name, "pdf")
     print "RESUME: Writing PDF to ", output_file
     cmd = ['pandoc', '--standalone', '--template', contextfile.name,
          '--from', 'markdown', '--to', 'context', '-V', 'papersize=A4',
@@ -21,13 +20,11 @@ def output_pdf(input_file, output_file, contextfile):
 
 
 def output_html(input_file, output_file, stylesheet_file):
-
     print "RESUME: Writing HTML to ", output_file
     cmd = ['pandoc', '--standalone', '-H', stylesheet_file.name,
            '--from', 'markdown', '--to', 'html',
            '-o', output_file, input_file.name]
     subprocess.call(cmd)
-
     replace_fa_strings(output_file)
 
 @click.command()
@@ -81,6 +78,7 @@ def cli(input_file, output, stylesheet, contextfile, private_file,
 
     if output in ["pdf", "all"]:
         pdf_output_file = swap_extension(input_file.name, "pdf")
+        import pdb; pdb.set_trace()
 
         if contextfile is None:
             # If the stylesheet option is not set, then try to find one
