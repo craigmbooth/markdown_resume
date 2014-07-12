@@ -1,5 +1,6 @@
 # Project specific
 private_info.yaml
+mdr/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
